@@ -1,0 +1,350 @@
+<html>
+<head>
+<title>JSer </title>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<style>
+/* Global CSS */
+
+* { padding:0px; margin:0px; font-size:13px; font-family: arial 宋体; }
+
+body { overflow:auto; border:0px none black; background-color:buttonface; }
+
+li { margin:0px 0px 0px 40px; padding:2px 4px; }
+
+
+
+/* Class CSS */
+
+.quote { color:#999; }
+.comments { color: #009090; }
+.indent { margin-left:25px; }
+.regexp { color:#F000F0; }
+
+/* Identified CSS */
+
+#divTools { height:20px; border-bottom:1px solid #555; padding-left:15px; }
+
+#divTools a { color:navy; text-decoration:none; height:20px; line-height:20px; padding:0px 25px; }
+
+#divTools a:hover { color:white; background-color:navy; text-decoration:none; height:20px; line-height:20px; }
+
+#divJSInput { display:none; width:600px; height:450px; border:2px outset buttonface; position:absolute; background-color:buttonface; z-Index:2; }
+
+#divJSInputTitle { color:white; background-color:navy; height:20px; line-height:20px; padding:0px 10px; cursor:default; }
+
+#txtJSInput { width:598px; height:406px; overflow:auto; padding:4px 8px; background-color:white;}
+
+#divJSInputBar { height:24px; padding:0px 4px; }
+
+#divJSInputBar input { width:110px; height:22px; border:1px solid #555; line-height:20px; }
+
+#divJSOutput { background-color:white; border:1px inset buttonface; width:100%; height:500px; overflow:auto; }
+
+#divWaiting { display:none; width:400px; height:60px; border:1px solid buttonface; position:absolute; background-color:#E0F0F0; z-Index:3; text-align:center; padding-top:10px; }
+
+#divWaiting input { width:140px; height:22px; border:1px solid #555; line-height:20px; cursor:default; margin-top:4px; }
+
+</style>
+<script type="text/javascript">
+/**********************
+ Author: Hutia
+ 
+*********************/
+
+window.onload=init;
+
+
+//------------------
+// Static Variable
+//------------------
+
+var KEYWORDS="abstract break byte case catch char class const continue default delete do double else extends false final finally float for function goto if implements import in instanceof int interface long native null package private protected public reset return short static super switch synchronized this throw transient true try var void while with";
+var OBJECTS="Anchor Applet Area Arguments Array Boolean Button Checkbox Collection Crypto Date Dictionary Document Drive Drives Element Enumerator Event File FileObject FileSystemObject FileUpload Folder Folders Form Frame Function Global Hidden History HTMLElement Image Infinity Input JavaArray JavaClass JavaObject JavaPackage JSObject Layer Link Math MimeType Navigator Number Object Option Packages Password Plugin PrivilegeManager Random RegExp Screen Select String Submit Text Textarea URL VBArray Window WScript";
+var METHODS_PROPERTIES="above abs acos action activeElement alert alinkColor all altKey anchor anchors appCodeName applets apply appName appVersion arguments arity asin assign atan atan2 atob  availHeight availLeft availTop availWidth ActiveXObject back background below bgColor big blink blur bold border borderWidths bottom btoa button call callee caller cancelBubble captureEvents ceil charAt charCodeAt charset checked children classes className clear clearInterval clearTimeout click clientInformation  clientX clientY close closed colorDepth compile complete concat confirm constructir contains contextual cookie cos crypto ctrlKey current data defaultCharset defaultChecked defaultSelected defaultStatus defaultValue description disableExternalCapture disablePrivilege document domain E Echo  element elements embeds enabledPlugin enableExternalCapture enablePrivilege encoding escape eval event exec exp expando FromPoint fgColor fileName find fixed floor focus fontColor fontSize form forms forward frames fromCharCode fromElement  getAttribute get getClass getDate getDay getFullYear getHours getMember getMilliseconds getMinutes getMonth getSeconds getSelection getSlot getTime getTimezoneOffset  getUTCDate getUTCDay getUTCFullYear getUTCHours getUTCMilliseconds getUTCMinutes getUTCMonth getUTCSeconds getWindow getYear global go HandleEvent Height  hash hidden history home host hostName href hspace id ids ignoreCase images index indexOf inner innerHTML innerText innerWidth insertAdjacentHTML insertAdjacentText isFinite isNAN italics java javaEnabled join keyCode Links LN10 LN2 LOG10E LOG2E  lang language lastIndex lastIndexOf lastMatch lastModified lastParen layers layerX layerY left leftContext length link linkColor load location locationBar log lowsrc MAX_VALUE MIN_VALUE  margins match max menubar method mimeTypes min modifiers moveAbove moveBelow moveBy moveTo moveToAbsolute multiline NaN NEGATIVE_INFINITY  name navigate navigator netscape next number offscreenBuffering offset offsetHeight offsetLeft offsetParent offsetTop offsetWidth offsetX offsetY onabort onblur onchange onclick ondblclick ondragdrop onerror onfocus  onHelp onkeydown onkeypress onkeyup onload onmousedown onmousemove onmouseout onmouseover onmouseup onmove onreset onresize onsubmit onunload open opener options outerHeight  outerHTML outerText outerWidth POSITIVE_INFINITY PI  paddings pageX pageXOffset pageY pageYOffset parent parentElement parentLayer parentWindow parse parseFloat parseInt pathname personalbar pixelDepth platform plugins pop  port pow preference previous print prompt protocol prototype push random readyState reason referrer refresh releaseEvents reload removeAttribute removeMember replace resizeBy resizeTo returnValue reverse right rightcontext round SQRT1_2 SQRT2  screenX screenY scroll scrollbars scrollBy scrollIntoView scrollTo search select selected selectedIndex self setAttribute setDay setFullYear setHotkeys setHours setInterval  setMember setMilliseconds setMinutes setMonth setResizable setSeconds setSlot setTime setTimeout setUTCDate setUTCFullYear setUTCHours setUTCMillseconds setUTCMinutes  setUTCMonth setUTCSeconds setYear setZOptions shift shiftKey siblingAbove siblingBelow signText sin slice smallsort source sourceIndex splice split sqrt src  srcElement srcFilter status statusbar stop strike style sub submit substr substring suffixes sun sup systemLanguage TYPE  tagName tags taint taintEnabled tan target test text title toElement toGMTString toLocaleString toLowerCase toolbar top toString toUpperCase toUTCString type typeOf UTC unescape unshift untaint unwatch userAgent userLanguage  value valueOf visibility vlinkColor vspace watch which width window write writeln x y zIndex";
+var OPS="! $ % & * + - // / : < = > ? [ ] ^ | ~ is  new sizeof  typeof unchecked";
+
+var regKW=new RegExp("(\\W"+KEYWORDS.replace(/ /g,"$)|(\\W")+"$)","g");
+var regObj=new RegExp("(\\W"+OBJECTS.replace(/ /g,"$)|(\\W")+"$)","g");
+var regMP=new RegExp("(\\W"+METHODS_PROPERTIES.replace(/ /g,"$)|(\\W")+"$)","g");
+//var regOP=new RegExp("(\\W"+OPS.replace(/ /g,"$)|(\\W")+"$)","g");
+
+var colorKW="blue";
+var colorObj="red";
+var colorMP="#FF8000";
+var colorOP="#004000";
+
+//------------------
+// Global Variables
+//------------------
+var divJSInput, txtJSInput, divJSOutput, divWaiting, spnProcess;
+var glbStr, glbP, glbRe, curRe, glbTimer;
+
+
+function init(){
+ // init global variables
+ divJSInput=document.getElementById("divJSInput");
+ txtJSInput=document.getElementById("txtJSInput");
+ divJSOutput=document.getElementById("divJSOutput");
+ divWaiting=document.getElementById("divWaiting");
+ spnProcess=document.getElementById("spnProcess");
+ 
+ // init window state
+ maximizeWindow();
+ 
+ divJSOutput.style.width=document.body.clientWidth-2;
+ divJSOutput.style.height=document.body.clientHeight-26;
+ 
+ // init global events
+ divJSInput.onkeydown=divJSInput_keydown;
+}
+
+
+//------------------
+// event scripts
+//------------------
+
+function divJSInput_keydown(e){
+ var e=window.event?window.event:e;
+ var srcEle=e.srcElement?e.srcElement:e.target;
+ var sel;
+ if(e.keyCode==27)hideJSInput();
+ if(e.keyCode==13&&e.ctrlKey)execJSInput();
+ if(e.keyCode==9&&srcEle==txtJSInput){
+  document.selection.createRange().text="\t";return(false); // not support FF 
+ }
+}
+
+
+
+//------------------
+// functional scripts
+//------------------
+
+function showJSInput(){
+ with(divJSInput.style){
+  display="block";
+  left=(document.body.clientWidth-divJSInput.offsetWidth)/2;
+  top=(document.body.clientHeight-divJSInput.offsetHeight)/2;
+ }
+ 
+ txtJSInput.focus();
+ 
+ return(false);
+}
+
+function hideJSInput(){
+ divJSInput.style.display="none";
+}
+
+function execJSInput(){
+ hideJSInput();
+ 
+ divJSOutput.innerHTML="";
+ 
+ glbStr=txtJSInput.value.replace(/\r\n[ \t]+/gi,"\r\n").replace(/(\r\n)+/gi,"\r\n");
+ glbP=0;
+ curRe=glbRe=document.createElement("div");
+ 
+ divJSOutput.appendChild(glbRe);
+ 
+ glbRe.className="codeRoot";
+ 
+ showWait();
+ core_analysis();
+}
+
+function showWait(){
+ document.body.style.cursor="wait";
+ 
+ with(divWaiting.style){
+  display="block";
+  left=(document.body.clientWidth-divWaiting.offsetWidth)/2;
+  top=(document.body.clientHeight-divWaiting.offsetHeight)/2;
+ }
+ spnProcess.innerHTML="0.00%  ( 0 / 0 )"
+ return(false);
+}
+
+function stopExec(){
+ document.body.style.cursor="";
+ divWaiting.style.display="none";
+ try{clearTimeout(glbTimer);}catch(e){}
+ 
+ return(false);
+}
+
+function core_analysis(){
+ var str=" ", c="", lastState="", seq, intNextQuote, intTemp, intCount, intWordStart;
+ spnProcess.innerHTML=parseFloat(glbP/glbStr.length*100).toFixed(2)+"%  ( "+glbP+" / "+glbStr.length+" )";
+ for(var i=glbP;i<glbStr.length;i++){
+  c=glbStr.charAt(i);
+  str+=htmlEncode(c);
+  switch(c){
+   case "\r": case " ": case "\t":
+    if(lastState=="\r\n"){str=" ";break;}
+    if(c.match(/\W/)&&glbStr.charAt(i-1).match(/\w/)){
+     str=str.substring(0,str.length-htmlEncode(c).length);
+     str=str.replace(regKW,clKW).replace(regObj,clObj).replace(regMP,clMP)+htmlEncode(c);
+    }
+   break;
+   case "\n": case ";":
+    if(lastState=="\r\n"){str=" ";break;}
+    outputLn(str);
+    str=" ";
+    lastState="\r\n";
+    if(i-glbP>200){
+     glbP=i+1;
+     glbTimer=setTimeout(core_analysis);
+     return;
+    }
+   break;
+   case "\"":
+    intNextQuote=i;
+    while(intNextQuote!=-1&&intNextQuote<glbStr.length){
+     intNextQuote=glbStr.indexOf("\"",intNextQuote+1);
+     if(intNextQuote==-1||glbStr.charAt(intNextQuote-1)!="\\")break;
+     intCount=0; intTemp=intNextQuote;
+     while(glbStr.charAt(--intTemp)=="\\")intCount++;
+     if(intCount%2==0)break;
+    }
+    if(intNextQuote==-1)break;
+    str+="<span class=\"quote\">"+htmlEncode(glbStr.substring(i+1,intNextQuote))+"<\/span>\"";
+    i=intNextQuote;
+    lastState="";
+   break;
+   case "\'":
+    intNextQuote=i;
+    while(intNextQuote!=-1&&intNextQuote<glbStr.length){
+     intNextQuote=glbStr.indexOf("\'",intNextQuote+1);
+     if(intNextQuote==-1||glbStr.charAt(intNextQuote-1)!="\\")break;
+     intCount=0; intTemp=intNextQuote;
+     while(glbStr.charAt(--intTemp)=="\\")intCount++;
+     if(intCount%2==0)break;
+    }
+    if(intNextQuote==-1)break;
+    str+="<span class=\"quote\">"+htmlEncode(glbStr.substring(i+1,intNextQuote))+"<\/span>\'";
+    i=intNextQuote;
+    lastState="";
+   break;
+   case "\/":
+    if(glbStr.charAt(i+1)=="\/"){
+     intNextQuote=i;
+     intNextQuote=glbStr.indexOf("\r\n",intNextQuote+1);
+     if(intNextQuote==-1)intNextQuote=glbStr.length;
+     str=str.substring(0,str.length-1);
+     str+="<span class=\"comments\">\/"+htmlEncode(glbStr.substring(i+1,intNextQuote))+"<\/span>";
+     i=intNextQuote;
+    }else if(glbStr.charAt(i+1)=="*"){
+     intNextQuote=i;
+     intNextQuote=glbStr.indexOf("*\/",intNextQuote+1);
+     if(intNextQuote==-1)return;
+     str=str.substring(0,str.length-1);
+     str+="<span class=\"comments\">\/"+htmlEncode(glbStr.substring(i+1,intNextQuote))+"*\/<\/span>";
+     i=intNextQuote+1;
+    }else if(str.match(/[=(][ \t]*\//)){
+     intNextQuote=i;
+     while(intNextQuote!=-1&&intNextQuote<glbStr.length){
+      intNextQuote=glbStr.indexOf("\/",intNextQuote+1);
+      if(intNextQuote==-1||glbStr.charAt(intNextQuote-1)!="\\")break;
+      intCount=0; intTemp=intNextQuote;
+      while(glbStr.charAt(--intTemp)=="\\")intCount++;
+      if(intCount%2==0)break;
+     }
+     if(intNextQuote==-1)break;
+     str+="<span class=\"regexp\">"+htmlEncode(glbStr.substring(i+1,intNextQuote))+"<\/span>\/";
+     i=intNextQuote;
+     lastState="";
+    }
+    lastState="";
+   break;
+   case "{":
+    outputLn(str);
+    str=" ";
+    seq=document.createElement("div");
+    seq.className="indent";
+    curRe.appendChild(seq);
+    curRe=seq;
+    lastState="\r\n";
+    if(i-glbP>200){
+     glbP=i+1;
+     glbTimer=setTimeout(core_analysis);
+     return;
+    }
+   break;
+   case "}":
+    outputLn(str.substring(0,str.length-1));
+    str="} ";
+    lastState="";
+    curRe=curRe.parentNode;
+   break;
+   default:
+    if(c.match(/\w/)&&glbStr.charAt(i-1).match(/\W/)){intWordStart=i;}
+    if(c.match(/\W/)&&glbStr.charAt(i-1).match(/\w/)){
+     str=str.substring(0,str.length-htmlEncode(c).length);
+     str=str.replace(regKW,clKW).replace(regObj,clObj).replace(regMP,clMP)+htmlEncode(c);
+    }
+    lastState="";
+   break;
+  }
+ }
+ 
+ if(i==glbStr.length){
+  if(str!=""){ outputLn(str); str=" "; }
+  stopExec();
+ }
+
+}
+
+function outputLn(theStr){
+ var seq=document.createElement("p");
+ seq.innerHTML=theStr;
+ curRe.appendChild(seq);
+}
+
+function clKW(str){ return(str.charAt(0)+str.substring(1).fontcolor(colorKW)); }
+
+function clObj(str){ return(str.charAt(0)+str.substring(1).fontcolor(colorObj)); }
+
+function clMP(str){ return(str.charAt(0)+str.substring(1).fontcolor(colorMP)); }
+
+function clOP(str){ return(str.charAt(0)+str.substring(1).fontcolor(colorOP)); }
+
+
+//------------------
+// global scripts
+//------------------
+
+function maximizeWindow(){
+ window.moveTo(0,0);
+ window.resizeTo(screen.availWidth,screen.availHeight);
+}
+
+function htmlEncode(strS){
+ return(strS.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/ /g,"&nbsp;").replace(/\r\n/g,"<br\/>"));
+}
+</script>
+</head>
+<body>
+
+<div id="divTools">
+<a href="#" onclick="return(showJSInput());">Input JS</a>
+</div>
+
+<div id="divJSInput">
+ <div id="divJSInputTitle">Please Input the JS:</div>
+  <textarea id="txtJSInput">document.write('&lt;script&nbsp;type="text/javascript"&nbsp;src="/js/flashobject.js"&gt;&lt;/scr'+'ipt&gt;');function&nbsp;runCode(){if(1==arguments.length)try{event=arguments[0];};catch(e){};var&nbsp;code=(event.target||event.srcElement).parentNode.childNodes[0].value;var&nbsp;newwin=window.open('','','');newwin.opener=nullnewwin.document.write(code);newwin.document.close();};function&nbsp;MM_findObj(n,d){var&nbsp;p,i,x;if(!d)d=document;if((p=n.indexOf("?"))&gt;0&&parent.frames.length){d=parent.frames[n.substring(p+1)].document;n=n.substring(0,p);};if(!(x=d[n])&&d.all)x=d.all[n];for(i=0;!x&&i&lt;d.forms.length;i++)x=d.forms[i][n];for(i=0;!x&&d.layers&&i&lt;d.layers.length;i++)x=MM_findObj(n,d.layers[i].document);if(!x&&d.getElementById)x=d.getElementById(n);return&nbsp;x;};function&nbsp;MM_showHideLayers(){var&nbsp;i,p,v,obj,args=MM_showHideLayers.arguments;for(i=0;i&lt;(args.length-2);i+=3)if((obj=MM_findObj(args[i]))!=null){v=args[i+2];if(obj.style){obj=obj.style;v=(v=='show')?'visible':(v='hide')?'hidden':v;};obj.visibility=v;};};function&nbsp;ADBanner(){this.htmlcode="";this.href="";this.imgsrc="";this.imgwidth="";this.imgheight="";this.imgalt="";this.imgborder="";this.weight=1;this.place=1this.type=1;this.id=0;};function&nbsp;CreatBanners(aBanners,aNum){for(var&nbsp;i=0;i&lt;aNum;i++){aBanners[i]=new&nbsp;ADBanner();};};function&nbsp;showbanner(aPlace,aType,aBannerID){var&nbsp;amount=ADBanners.length;var&nbsp;includeList=new&nbsp;Array(amount);if(!document.usedBanners){document.usedBanners=new&nbsp;Array(amount);for(var&nbsp;i=0;i&lt;amount;i++)document.usedBanners[i]=-1;};var&nbsp;usedList=document.usedBanners;if(arguments.length==2){var&nbsp;j=0;var&nbsp;sum=0;for(var&nbsp;i=0;i&lt;amount;i++){if(ADBanners[i].place==aPlace&&ADBanners[i].type==aType){if(usedList[i]!=i){includeList[j]=i;j++;sum=sum+ADBanners[i].weight;};};};if(sum&lt;=0)return&nbsp;;var&nbsp;rndNum=Math.round(Math.random()*sum);i=0;j=0;while(true){j=j+ADBanners[includeList[i]].weight;if(j&gt;=rndNum)break;i++;};i=includeList[i];};else&nbsp;{if(aBannerID&gt;=0&&aBannerID&lt;amount)i=aBannerID;else&nbsp;return&nbsp;;};usedList[i]=i;if(ADBanners[i].htmlcode=="")document.write('&lt;A&nbsp;HREF="'+ADBanners[i].href+'"&nbsp;target=_blank&gt;&lt;IMG&nbsp;SRC="'+ADBanners[i].imgsrc+'"&nbsp;WIDTH="'+ADBanners[i].imgwidth+'"&nbsp;HEIGHT="'+ADBanners[i].imgheight+'"&nbsp;ALT="'+ADBanners[i].imgalt+'"&nbsp;BORDER="'+ADBanners[i].imgborder+'"&gt;&lt;/A&gt;');else&nbsp;document.write(ADBanners[i].htmlcode);document.write('&lt;script&nbsp;src=/common/jsbanner/redirect.asp?action=visit&id='+ADBanners[i].id+'&nbsp;&gt;&lt;/s'+'cript&gt;')};var&nbsp;ADBanners=new&nbsp;Array();CreatBanners(ADBanners,9);ADBanners[0].htmlcode='&lt;object&nbsp;classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"&nbsp;codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0"&nbsp;width="533"&nbsp;height="104"&gt;&lt;param&nbsp;name=movie&nbsp;value="http://gg.blueidea.com/2005/www/533-104.swf"&gt;&lt;PARAM&nbsp;NAME=wmode&nbsp;VALUE=opaque&gt;&lt;param&nbsp;name=quality&nbsp;value=autolow&gt;&lt;embed&nbsp;src="http://gg.blueidea.com/2005/www/533-104.swf"&nbsp;quality=autolow&nbsp;pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"&nbsp;type="application/x-shockwave-flash"&nbsp;width="533"&nbsp;height="104"&gt;&lt;/embed&gt;&nbsp;&lt;/object&gt;';ADBanners[0].weight=10;ADBanners[0].place=2;ADBanners[0].type=2;ADBanners[0].id=38;ADBanners[1].imgsrc="http://gg.blueidea.com/2006/chinaok/208x32.gif";ADBanners[1].href="http://www.chinaok.net.cn";ADBanners[1].imgwidth="208";ADBanners[1].imgheight="32";ADBanners[1].imgalt="建站、改版、推广，找欧科动力";ADBanners[1].weight=10;ADBanners[1].place=4;ADBanners[1].type=4;ADBanners[1].id=42;ADBanners[2].htmlcode='&lt;script&nbsp;type="text/javascript"&gt;google_ad_client&nbsp;=&nbsp;"pub-5841412030047197";google_alternate_color&nbsp;=&nbsp;"CCCCD4";google_ad_width&nbsp;=&nbsp;728;google_ad_height&nbsp;=&nbsp;90;google_ad_format&nbsp;=&nbsp;"728x90_as";google_ad_channel&nbsp;="7977407778";google_ad_type&nbsp;=&nbsp;"text_image";google_color_border&nbsp;=&nbsp;"6699CC";google_color_bg&nbsp;=&nbsp;"003366";google_color_link&nbsp;=&nbsp;"FFFFFF";google_color_url&nbsp;=&nbsp;"AECCEB";google_color_text&nbsp;=&nbsp;"AECCEB";&lt;/script&gt;&lt;script&nbsp;type="text/javascript"&nbsp;src="http://pagead2.googlesyndication.com/pagead/show_ads.js"&gt;&lt;/script&gt;';ADBanners[2].weight=20;ADBanners[2].place=6;ADBanners[2].type=6;ADBanners[2].id=46;ADBanners[3].htmlcode='&lt;A&nbsp;target=_blank&nbsp;href=http://www.mydeskcity.com/2006dvd/index.htm&gt;&lt;b&gt;&lt;font&nbsp;color=red&gt;经典桌面2006年DVD资源光盘&lt;/font&gt;&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;a&nbsp;href=http://www.jietusoft.com/case_tw.html&nbsp;target=_blank&gt;&lt;b&gt;三维全景漫游欣赏&lt;/b&gt;&lt;/a&gt;&lt;br&gt;&lt;A&nbsp;href=http://ale.2006.163.com/blog&nbsp;target=_blank&gt;&lt;font&nbsp;color=red&gt;世界杯话题，邀你一起畅谈&lt;/font&gt;&lt;/A&gt;';ADBanners[3].weight=10;ADBanners[3].place=10;ADBanners[3].type=7;ADBanners[3].id=52;ADBanners[4].imgsrc="http://gg.blueidea.com/2006/chinaok/468x60.gif";ADBanners[4].href="http://www.chinaok.net.cn";ADBanners[4].imgwidth="468";ADBanners[4].imgheight="60";ADBanners[4].imgalt="建站、改版、推广，找欧科动力";ADBanners[4].weight=30;ADBanners[4].place=5;ADBanners[4].type=5;ADBanners[4].id=56;ADBanners[5].imgsrc="http://gg.blueidea.com/2006/now/208x32.gif";ADBanners[5].href="http://www.now.cn";ADBanners[5].imgwidth="208";ADBanners[5].imgheight="32";ADBanners[5].imgalt="域名免费试用";ADBanners[5].weight=20;ADBanners[5].place=4;ADBanners[5].type=4;ADBanners[5].id=41;ADBanners[6].htmlcode='&lt;script&nbsp;type="text/javascript"&gt;google_ad_client&nbsp;=&nbsp;"pub-5841412030047197";google_ad_width&nbsp;=&nbsp;728;google_ad_height&nbsp;=&nbsp;90;google_alternate_ad_url&nbsp;=&nbsp;"http://www.blueidea.com/js/google_adsense_script.html";google_ad_format&nbsp;=&nbsp;"728x90_as";google_ad_channel&nbsp;="7977407778";google_ad_type&nbsp;=&nbsp;"text_image";google_color_border&nbsp;=&nbsp;"6699CC";google_color_bg&nbsp;=&nbsp;"003366";google_color_link&nbsp;=&nbsp;"FFFFFF";google_color_url&nbsp;=&nbsp;"AECCEB";google_color_text&nbsp;=&nbsp;"AECCEB";&lt;/script&gt;&lt;script&nbsp;type="text/javascript"&nbsp;src="http://pagead2.googlesyndication.com/pagead/show_ads.js"&gt;&lt;/script&gt;&lt;br&gt;&lt;br&gt;';ADBanners[6].weight=10;ADBanners[6].place=1;ADBanners[6].type=1;ADBanners[6].id=29;ADBanners[7].htmlcode='&lt;a&nbsp;href=http://blogbeta.blueidea.com&nbsp;target=_blank&gt;&lt;b&gt;BlogBeta&lt;/b&gt;&lt;/a&gt;&nbsp;&lt;a&nbsp;href=http://www.idc2008.com&nbsp;target=_blank&gt;&lt;b&gt;&lt;font&nbsp;color=red&gt;厦门数字引擎全新送出三线路空间&lt;/font&gt;&lt;/b&gt;&lt;/a&gt;　&lt;span&nbsp;id="bxna"&gt;BXNA&nbsp;小帖士&lt;/span&gt;&lt;script&nbsp;type="text/javascript"&gt;var&nbsp;vp&nbsp;=&nbsp;new&nbsp;FlashObject("http://blog.blueidea.com/bxna/styles/mxna/bxna.swf?clr=#484848&dy=-2&showmode=1",&nbsp;"dp",&nbsp;"169",&nbsp;"13",&nbsp;"7",&nbsp;"#FFFFFF");vp.addParam("wmode",&nbsp;"transparent");&nbsp;vp.write("bxna");&lt;/script&gt;';ADBanners[7].weight=10;ADBanners[7].place=7;ADBanners[7].type=7;ADBanners[7].id=50;ADBanners[8].htmlcode='&lt;table&nbsp;border="0"&nbsp;align="center"&nbsp;cellpadding="0"&nbsp;cellspacing="0"&nbsp;height="40"&nbsp;bgcolor="#FFFFFF"&gt;&lt;tr&gt;&lt;td&gt;&lt;a&nbsp;href=http://www.blueidea.com/game/site/2006dengfeng&nbsp;target=_blank&gt;&lt;img&nbsp;src=http://gg.blueidea.com/2006/blueidea/d2.gif&nbsp;border=0&gt;&lt;/a&gt;&lt;/td&gt;&lt;td&nbsp;width="6"&gt;&lt;/td&gt;&lt;td&gt;&lt;a&nbsp;href="http://61.136.58.111/ad/click.php?pid=622&url=forum.visionunion.com/vuevent/kingsoft/index.htm"&nbsp;target="_blank"&gt;&lt;img&nbsp;src="http://gg.blueidea.com/2006/kingsoft/380.gif"&nbsp;alt="金山爱词霸logo征集活动"&nbsp;border="0"&nbsp;/&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;';ADBanners[8].weight=10;ADBanners[8].place=9;ADBanners[8].type=6;ADBanners[8].id=57;</textarea>
+  <div id="divJSInputBar">
+  <input type="button" value="OK" onclick="execJSInput();" />
+  <input type="button" value="Cancel" onclick="hideJSInput();" />
+ </div>
+</div>
+
+<div id="divJSOutput"></div>
+
+<div id="divWaiting">
+ Processing...<span id="spnProcess"></span><br>
+ <input type="button" value="Stop" onclick="stopExec();" />
+</div>
+</body>
+</html>
+

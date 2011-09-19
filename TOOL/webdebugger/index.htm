@@ -1,0 +1,121 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>网页代码调试器</title>
+
+<meta content="帮助您测试网页功能,是站长的必备工具软件!" name="description">
+<meta content="网页代码,代码调试" name="keywords">
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<link rel="shortcut icon" href="#.ico" type="image/x-icon">
+<link href="../css/toolsite.css"  rel="stylesheet" type="text/css">
+
+
+
+			
+</head>
+<body>
+<!--head-->
+<script type="text/javascript" language="javascript">
+ function Webtest()
+ {
+    var win = window.open();
+    win.document.open();
+    win.document.write(getid('content').value);
+    win.document.close();
+ }
+function saveCode()
+{
+  var win=window.open('','','top=10000,left=10000');
+
+  win.document.write(getid('content').value);
+  win.document.execCommand('SaveAs','','文件名称.html');
+  win.close();
+}
+</script>
+
+<script language="javascript" type="text/javascript">
+//支持IE和火狐
+function Copy(ID){
+       var clipBoardContent="";
+       clipBoardContent=document.getElementById(ID).value;
+       if(window.clipboardData){
+              window.clipboardData.clearData();
+              window.clipboardData.setData("Text", clipBoardContent);
+       }else if(navigator.userAgent.indexOf("Opera") != -1){
+              window.location = clipBoardContent;
+       }else if (window.netscape){
+              try{
+                     netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+              }catch (e){
+                     alert("您的当前浏览器设置已关闭此功能！请按以下步骤开启此功能！\n新开一个浏览器，在浏览器地址栏输入'about:config'并回车。\n然后找到'signed.applets.codebase_principal_support'项，双击后设置为'true'。\n声明：本功能不会危极您计算机或数据的安全！");
+              }
+              var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+              if (!clip) return;
+              var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+              if (!trans) return;
+              trans.addDataFlavor('text/unicode');
+              var str = new Object();
+              var len = new Object();
+              var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+              var copytext = clipBoardContent;
+              str.data = copytext;
+              trans.setTransferData("text/unicode",str,copytext.length*2);
+              var clipid = Components.interfaces.nsIClipboard;
+              if (!clip) return false;
+              clip.setData(trans,null,clipid.kGlobalClipboard);
+       }
+       alert("已成功复制！");
+       return true;
+}
+function check(n, d) { 
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=check(n,d.layers[i].document);
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+}
+function clean(ID) { 
+	document.getElementById(ID).value="";
+}
+
+function allselect(ID) { 
+	document.getElementById(ID).select();
+}
+
+</script>
+<!--middle-->
+<!--main-->
+<div class="main">
+ <div class="box">
+   <div id="b_1">
+       <h1>网页代码调试器</h1>
+       <div class="box1" style="text-align: center;">
+    <div class="info1">
+        <div style="color: rgb(0, 106, 173); font-size: 16px; font-weight: bold; margin-bottom: 10px;">网页代码调试器</div>
+        <div align="center"><textarea id="content" name="txtContent" style="border: 1px solid rgb(197, 226, 242); overflow: visible;" cols="150" rows="25">请把要调试的内容粘贴到这里。</textarea></div>  
+        <div class="WSt1"> 
+           <input class="but" value="调试预览" onclick="Webtest();" type="button">
+           <input class="but" value="全选代码" onclick="allselect('content');" type="button">
+           <input class="but" value="清空代码" onclick="clean('content')" type="button">
+           <input class="but" value="复制代码" onclick="Copy('content')" type="button">
+           <input class="but" value="保存代码" onclick="saveCode();" type="button"> 
+           <input class="but" value="本站首页" onclick="window.open('#')" type="button"> 
+        </div> 
+    </div>
+  </div>
+   </div>
+ </div>
+  <div class="box">
+                <h1>工具简介</h1>
+                <div class="box1">
+                  <span class="info2">
+                    通过本工具可以测试网页功能,是站长的必备工具软件!
+                  </span>
+                </div>
+   </div>
+</div>
+<!--foot-->
+
+
+
+
+
+</body></html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Meta标签生成器</title>
+
+
+<meta content="帮助您迅速完成网站的Meta标签。在做SEO的时候，总是要给网页的META标签里写内容，但是很多时候都是重复的写着这些代码，太过麻烦了。试试META标签的生成器，做SEO的好工具。" name="description">
+<meta content="Meta标签生成" name="keywords">
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<link rel="shortcut icon" href="#.ico" type="image/x-icon">
+<link href="../css/toolsite.css" rel="stylesheet" type="text/css">
+
+
+
+			
+</head>
+<body>
+<!--head-->
+<script language="javascript" type="text/javascript">
+
+function Copy(ID){
+       var clipBoardContent="";
+       clipBoardContent=document.getElementById(ID).value;
+       if(window.clipboardData){
+              window.clipboardData.clearData();
+              window.clipboardData.setData("Text", clipBoardContent);
+       }else if(navigator.userAgent.indexOf("Opera") != -1){
+              window.location = clipBoardContent;
+       }else if (window.netscape){
+              try{
+                     netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+              }catch (e){
+                     alert("您的当前浏览器设置已关闭此功能！请按以下步骤开启此功能！\n新开一个浏览器，在浏览器地址栏输入'about:config'并回车。\n然后找到'signed.applets.codebase_principal_support'项，双击后设置为'true'。\n声明：本功能不会危极您计算机或数据的安全！");
+              }
+              var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+              if (!clip) return;
+              var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+              if (!trans) return;
+              trans.addDataFlavor('text/unicode');
+              var str = new Object();
+              var len = new Object();
+              var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+              var copytext = clipBoardContent;
+              str.data = copytext;
+              trans.setTransferData("text/unicode",str,copytext.length*2);
+              var clipid = Components.interfaces.nsIClipboard;
+              if (!clip) return false;
+              clip.setData(trans,null,clipid.kGlobalClipboard);
+       }
+       alert("已成功复制！");
+       return true;
+}
+
+
+function createmetag(form) {
+ if (confirm("确认生成代码?")) 
+ {
+ if (form.title.value != "") {
+ form.story.value +="<META NAME=\"Title\" CONTENT=\"" +
+ form.title.value + "\">\n";
+ }
+ if (form.author.value != "") {
+ form.story.value +="<META NAME=\"Author\" CONTENT=\"" +
+ form.author.value + "\">\n";
+ }
+ if (form.subject.value != "") {
+ form.story.value +="<META NAME=\"Subject\" CONTENT=\"" +
+ form.subject.value + "\">\n";
+ }
+ if (form.descript.value != "") {
+ form.story.value +="<META NAME=\"Description\" CONTENT=\"" +
+ form.descript.value + "\">\n";
+ }
+ if (form.keyword.value != "") {
+ form.story.value +="<META NAME=\"Keywords\" CONTENT=\"" +
+ form.keyword.value + "\">\n";
+ }
+ if (form.gen.value != "") {
+ form.story.value +="<META NAME=\"Generator\" CONTENT=\"" +
+ form.gen.value + "\">\n";
+ }
+ if (form.input7.value != "") {
+ form.story.value +="<META NAME=\"Language\" CONTENT=\"" +
+ form.input7.value + "\">\n";
+ }
+ if (form.input8.value != "") {
+ form.story.value +="<META NAME=\"Expires\" CONTENT=\"" +
+ form.input8.value + "\">\n";
+ }
+ if (form.input9.value != "") {
+ form.story.value +="<META NAME=\"Abstract\" CONTENT=\"" +
+ form.input9.value + "\">\n";
+ }
+ if (form.input10.value != "") {
+ form.story.value +="<META NAME=\"Copyright\" CONTENT=\"" +
+ form.input10.value + "\">\n";
+ }
+ if (form.input11.value != "") {
+ form.story.value +="<META NAME=\"Designer\" CONTENT=\"" +
+ form.input11.value + "\">\n";
+ }
+ if (form.input12.value != "") {
+ form.story.value +="<META NAME=\"Publisher\" CONTENT=\"" +
+ form.input12.value + "\">\n";
+ }
+ if (form.input13.value != "") {
+ form.story.value +="<META NAME=\"Revisit-After\" CONTENT=\"" +
+ form.input13.value + " \Days\">\n";
+ }
+ if (form.input14.value != "") {
+ form.story.value +="<META NAME=\"Distribution\" CONTENT=\"" +
+ form.input14.options[form.input14.selectedIndex].value + "\">\n";
+ }
+ if (form.input15.value != "") {
+ form.story.value +="<META NAME=\"Robots\" CONTENT=\"" +
+ form.input15.options[form.input15.selectedIndex].value + "\">\n";
+ }
+ }
+}
+</script>
+<!--middle-->
+<!--main-->
+<form name="aspnetForm" method="post" action="" id="aspnetForm">
+<div class="main">
+ <div class="box">
+   <div id="b_1">
+       <h1>Meta 标签生成器</h1>
+       <div class="box1" style="text-align: center;">
+          <div class="info1">
+          <table style="height: 34px;" align="center" border="0" cellpadding="0" cellspacing="0" width="760">
+            <tbody><tr> 
+              <td align="center"><div style="color: rgb(0, 106, 173); margin-bottom: 20px; font-weight: bolder; font-size: 16px;">Meta 标签生成器</div></td>
+            </tr>
+          </tbody></table>
+          <div align="center"> 
+            <table align="center" bgcolor="#cccccc" cellpadding="5" cellspacing="1" width="760">
+              <tbody><tr> 
+                <td bgcolor="#f4fbf3" width="200">Title：（主题）</td>
+                <td align="left" bgcolor="#f4fbf3"> 
+                  <input class="input" name="title" onfocus="this.select()" value="如：Meta 标签生成器" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#e9f8e7" width="200">Author：（作者）</td>
+                <td align="left" bgcolor="#e9f8e7"> 
+                  <input class="input" name="author" onfocus="this.select()" value="如：ishare.iask.sina.com.cn" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#f4fbf3" width="200">Subject：（主题）</td>
+                <td align="left" bgcolor="#f4fbf3"> 
+                  <input class="input" name="subject" onfocus="this.select()" value="如：Meta 标签生成器" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#e9f8e7" width="200">Description：（描述）</td>
+                <td align="left" bgcolor="#e9f8e7"> 
+                  <input class="input" name="descript" onfocus="this.select()" value="如：在线生成META标签的工具" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#f4fbf3" width="200">Keywords：（关键字）</td>
+                <td align="left" bgcolor="#f4fbf3"> 
+                  <input class="input" name="keyword" onfocus="this.select()" value="如：Meta 标签生成器;工具" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#e9f8e7" width="200">Generator：（编辑器）</td>
+                <td align="left" bgcolor="#e9f8e7"> 
+                  <input class="input" name="gen" onfocus="this.select()" value="如：Meta 标签生成器" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#f4fbf3" width="200">Language：（语言）</td>
+                <td align="left" bgcolor="#f4fbf3"> 
+                  <input class="input" name="input7" onfocus="this.select()" value="如：zh-CN" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#e9f8e7" width="200">Expires：（期限）</td>
+                <td align="left" bgcolor="#e9f8e7"> 
+                  <input class="input" name="input8" onfocus="this.select()" value="如：Wed, 11 Feb 2009 00:51:09 EST" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#f4fbf3" width="200">Abstract：（摘要）</td>
+                <td align="left" bgcolor="#f4fbf3"> 
+                  <input class="input" name="input9" onfocus="this.select()" value="如：Meta 标签生成器" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#e9f8e7" width="200">Copyright：（版权）</td>
+                <td align="left" bgcolor="#e9f8e7"> 
+                  <input class="input" name="input10" onfocus="this.select()" value="如：ishare.iask.sina.com.cn" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#f4fbf3" width="200">Designer：（设计者）</td>
+                <td align="left" bgcolor="#f4fbf3"> 
+                  <input class="input" name="input11" onfocus="this.select()" value="如：ishare.iask.sina.com.cn" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#e9f8e7" width="200">Publisher：（出版者）</td>
+                <td align="left" bgcolor="#e9f8e7"> 
+                  <input class="input" name="input12" onfocus="this.select()" value="如：ishare.iask.sina.com.cn" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#f4fbf3" width="200">Revisit-After：（重访）</td>
+                <td align="left" bgcolor="#f4fbf3"> 
+                  <input class="input" name="input13" onfocus="this.select()" value="请在此输入标题，如：Meta 标签生成器" size="50" type="text">
+                </td>
+              </tr>
+              <tr> 
+                <td bgcolor="#e9f8e7" width="200">Distribution：（分配）</td>
+                <td align="left" bgcolor="#e9f8e7"> 
+                  <select name="input14" size="1">
+                    <option value="" selected="selected">Select One</option>
+                    <option value="Global">Global</option>
+                    <option value="Local">Local</option>
+                    <option value="IU">Intern Use</option>
+                  </select>
+                </td>
+              </tr><tr> 
+                <td bgcolor="#f4fbf3" width="200">Robots：（机器人向导）</td>
+                <td align="left" bgcolor="#f4fbf3"> 
+                  <select name="input15" size="1">
+                    <option value="" selected="selected">Select One</option>
+                    <option value="All">All</option>
+                    <option value="None">None</option>
+                    <option value="Index">Index</option>
+                    <option value="No Index">No Index</option>
+                    <option value="Follow">Follow</option>
+                    <option value="No Follow">No Follow</option>
+                  </select>
+                </td>
+              </tr>
+              <tr bgcolor="#e9f8e7"> 
+                <td colspan="2"> 
+                  <div align="center"> 
+                    <input class="but" value="生成 META 标签" onclick="createmetag(this.form)" name="button" type="button">
+                    <input class="but" value="清除" name="reset" type="reset">
+                    <input class="but" onclick="Copy('story');" name="Submit" value="复制" type="button">
+                  </div>
+                </td>
+              </tr>
+              <tr> 
+                <td colspan="2" bgcolor="#ffffff"> 
+                  <div align="center"> 
+                    <textarea id="story" name="story" rows="12" cols="150"></textarea>
+                  </div>
+                </td>
+              </tr>
+            </tbody></table>
+          </div>
+       </div>
+    </div>
+   </div>
+ </div>
+  <div class="box">
+                <h1>工具简介</h1>
+                <div class="box1">
+                  <span class="info2">                通过本工具可以迅速完成网站的Meta标签。在做SEO的时候，总是要给网页的META标签里写内容，但是很多时候都是重复的写着这些代码，太过麻烦了。试试META标签的生成器，做SEO的好工具。
+                  </span>
+                </div>
+   </div>
+</div>
+</form><!--foot-->
+
+
+
+
+
+</body></html>

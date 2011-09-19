@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Encode加密/UnEncode解密</title>
+
+<meta content="帮助您将代码以Encode加密/UnEncode解密。" name="description">
+<meta content="Encode加密,UnEncode解密" name="keywords">
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<link rel="shortcut icon" href="#.ico" type="image/x-icon">
+<link href="../css/toolsite.css" rel="stylesheet" type="text/css">
+
+
+
+			
+</head>
+<body>
+<!--head-->
+<script src="js/Encode.js" type="text/javascript"></script>
+<script language="vbscript"> 
+Function str2asc(strstr) 
+str2asc = hex(asc(strstr)) 
+End Function 
+Function asc2str(ascasc) 
+asc2str = chr(ascasc) 
+End Function 
+</script>
+<!--middle-->
+<!--main-->
+<div class="main">
+ <div class="box">
+   <div id="b_1">
+       <h1>把代码以Encode加密/UnEncode解密</h1>
+       <div class="box1">
+             <div class="info3" style="text-align:center"><p><textarea id="content" class="Etext" cols="20" rows="20">请把你需要加密的内容粘贴在这里！[由于兼容性问题，此转换功能只能在IE中使用，FIREFOX无效]</textarea></p>
+			 <p>&nbsp;&nbsp;</p>
+			<p><input class="but" onclick="Encode();" value="Encode加密" type="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="but" onclick="UnEncode();" value="UnEncode解密" type="button"></p>
+             </div>
+			 <div class="seo_dl" id="div0" style="text-align:left"></div>
+             <div class="seo_dl" id="detail" style="text-align:left">
+             </div>
+       </div>
+   </div>
+ </div>
+  <div class="box">
+                <h1>工具简介</h1>
+                <div class="box1">
+                  <span class="info2">
+                  通过本工具可以将代码以Encode加密/UnEncode解密。
+Encode应该是个自定义函数，完成加密功能。一般在conn.asp里编写这个函数，或直接在本页面编写，当然也可能在其他包含进来的文件里文字。
+                  </span>
+                </div>
+   </div>
+</div><!--foot-->
+
+
+
+
+
+</body></html>

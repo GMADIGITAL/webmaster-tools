@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+<title>汉字转换拼音工具</title>
+
+<meta content="帮助您将文字转换成拼音。请在“输入汉字”框里输入你想要的转换的汉字，然后点“翻译”按钮，即可将汉字转换为拼音。" name="description"/>
+<meta content="汉字转拼音,汉字拼音工具" name="keywords"/>
+<meta http-equiv="X-UA-Compatible" content="IE=7"/>
+<link rel="shortcut icon" href="#.ico" type="image/x-icon"/>
+<link href="../css/toolsite.css" rel="stylesheet" type="text/css"/>
+
+
+
+			
+</head>
+<body>
+<!--head-->
+<script language="vbscript">
+function g5(n)
+g5=asc(n)
+end function 
+</script>
+<script src="js/Word_Spell.js" type="text/javascript"></script><textarea name="Paste23t" style="position:absolute;z-index:1;top:-200px;"></textarea>
+<textarea name="Paste23t" style="position: absolute; z-index: 1; top: -200px;"></textarea>
+<!--middle-->
+<!--main-->
+<div class="main">
+ <div class="box">
+   <div id="b_1">
+       <h1>汉字转换拼音工具</h1>
+       <div class="box1">
+       <div class="info1">
+         <div class="WStop">
+            <div class="WStop1">
+             <div class="WStop2">&gt;&gt;将输入的中文按要求翻译成拼音&lt;&lt;</div>
+            </div>
+            <div style="padding: 5px;"> 
+             <div class="WSIn">
+                <div class="WSTitle">原中文：</div>
+                <div class="WSt">
+                    <textarea id="af1" name="af1" class="WStxt">欢迎使用《汉字转换拼音》工具 (汉字拼音查询)[由于兼容性问题，此转换功能只能在IE中使用，FIREFOX无效]</textarea>
+                </div>
+                <div class="WSt1">
+                    <input value="复制" onclick="af1.select();document.execCommand(&quot;Copy&quot;)" class="but" type="button"/>
+                    <input value="粘贴" onclick="af1.value+=Paste3()" class="but" type="button"/>
+                    <input value="清除" onclick="af1.value=''" class="but" type="button"/>
+	                <input id="Ianse_Com_Button" onclick="if (af1.value==''){alert('请输入需要转换成拼音的中文！');return false;}af2.value=jjfy(af1.value);" value="翻译" class="but" type="button"/>
+	            </div>
+                <div class="WSTitle">转换成拼音字符：</div>
+                <div class="WSt">
+                    <textarea id="af2" name="af2" class="WStxt"></textarea>
+                </div>
+                <div class="WSt1">
+                    <input value="复制" onclick="af2.select();document.execCommand(&quot;Copy&quot;)" class="but" type="button"/>
+                    <input value="粘贴" onclick="af2.value+=Paste3()" class="but" type="button"/>
+                    <input value="清除" onclick="af2.value=''" class="but" type="button"/>
+                </div>
+                <div class="WSt">对照方式：
+	                <input id="aa1" class="WSradio" name="pjandchina" value="radiobutton" checked="checked" type="radio"/> 普通翻译
+	                <input id="aa2" class="WSradio" name="pjandchina" value="radiobutton" type="radio"/> 对照（中文在拼音前）
+	                <input id="aa3" class="WSradio" name="pjandchina" value="radiobutton" type="radio"/> 对照（中文在拼音后）
+	            </div>
+	            <div class="WSt">符号设置：
+	                <input class="WSradio" name="rcb1" id="rcb1" value="checkbox" checked="checked" type="checkbox"/> 保留中文标点符号
+	                <input class="WSradio" name="rcb2" id="rcb2" value="checkbox" checked="checked" type="checkbox"/> 保留字母和回车符号
+	                <input class="WSradio" name="rcb3" id="rcb3" value="checkbox" checked="checked" type="checkbox"/> 中文字之间加空格
+	           </div> 
+             </div>
+           </div>
+        </div>
+      </div>
+    </div>
+   </div>
+ </div>
+  <div class="box">
+                <h1>工具简介</h1>
+                <div class="box1">
+                  <span class="info2">                 通过本工具可以将文字转换成拼音。请在“输入汉字”框里输入你想要的转换的汉字，然后点“翻译”按钮，即可将汉字转换为拼音。
+                  </span>
+                </div>
+   </div>
+</div><!--foot-->
+
+
+
+
+
+</body></html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>BASE64加密、解密</title>
+
+<meta content="帮助您对代码进行Base64加密或者解密。Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一。" name="description">
+<meta content="BASE64加密,BASE64解密" name="keywords">
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<link rel="shortcut icon" href="#.ico" type="image/x-icon">
+<link href="../css/toolsite.css" rel="stylesheet" type="text/css">
+
+
+
+			
+</head>
+<body>
+<!--head-->
+<script src="js/Base64.js" type="text/javascript"></script>
+<!--middle-->
+<!--main-->
+<div class="main">
+ <div class="box">
+   <div id="b_1">
+       <h1>将代码以BASE64方式加密、解密</h1>
+       <div class="box1" style="text-align: center;">
+         <span class="info3">
+             <textarea id="content" style="border: 1px solid rgb(197, 226, 242); overflow: visible; width: 800px; height: 350px;">请把你需要加密的内容粘贴在这里！[注：由于兼容性问题，此颜色代码选择功能只能在IE中使用，FIREFOX无效]</textarea>
+         </span>
+           <input class="but" onclick="content.value=encode64(content.value);" value="BASE64加密" type="button">&nbsp;&nbsp;&nbsp;&nbsp;
+           <input class="but" onclick="content.value=decode64(content.value);" value="BASE64解密" type="button">
+       </div>
+   </div>
+ </div>
+  <div class="box">
+                <h1>工具简介</h1>
+                <div class="box1">
+                  <span class="info2">                    通过本工具可以对代码进行Base64加密或者解密。Base64是网络上最常见的用于传输8Bit字节代码的编码方式之一。 
+                  </span>
+                </div>
+   </div>
+</div>
+<!--foot-->
+
+
+
+
+
+</body></html>

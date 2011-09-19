@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>弹窗代码参数生成器</title>
+
+
+<meta content="帮助您设置弹窗的参数和方式。包括弹窗的大小、链接、地址栏、滚动条、状态栏等等。" name="description">
+<meta content="弹窗代码,代码参数生成" name="keywords">
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<link rel="shortcut icon" href="#.ico" type="image/x-icon">
+<link href="../css/toolsite.css" rel="stylesheet" type="text/css">
+
+
+
+			
+</head>
+<body>
+<!--head-->
+<script src="js/Openweb.js" type="text/javascript"></script>
+<!--middle-->
+<!--main-->
+<div class="main">
+ <div class="box">
+   <div id="b_1">
+       <h1>弹窗代码参数生成器</h1>
+       <div class="box1" style="text-align: center;">
+        <div class="info1">
+          <div class="Gbtop">
+            <div class="WStop1">
+            <div class="WStop2">OPEN参数生成器</div>
+            </div>
+            <div style="padding: 25px 5px 5px;" align="center"> 
+                <table align="center" bgcolor="#cccccc" border="0" cellpadding="0" cellspacing="0" width="760">
+                  <tbody> 
+                  <tr> 
+                    <td align="center" bgcolor="#ffffff" valign="middle"> 
+                     <form name="form1" method="post">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tbody> 
+                          <tr> 
+                            <td align="center" valign="top" width="747" height="280"> 
+                              <table align="center" bgcolor="#cccccc" border="0" cellpadding="0" cellspacing="1" width="100%">
+                                <tbody> 
+                                <tr bgcolor="#f0f0f0"> 
+                                  <td colspan="6" bgcolor="#ffffff"><div style="margin-top: 5px;" align="left">&nbsp;URL: <input class="input" size="54" value="http://" name="url"></div>
+                                  </td>
+                                </tr>
+                                <tr bgcolor="#f0f0f0"> 
+                                  <td bgcolor="#ffffff">
+                                    <input value="ON" name="tool" type="checkbox">快捷键
+				                  </td>
+                                  <td bgcolor="#ffffff">
+                                    <input value="ON" name="loc" type="checkbox">地址栏
+				                  </td>
+                                  <td bgcolor="#ffffff">
+                                    <input value="ON" name="link" type="checkbox">链 接
+			                      </td>
+                                  <td bgcolor="#ffffff">
+                                    <input value="ON" name="stat" type="checkbox">状态栏
+				                  </td>
+                                  <td bgcolor="#ffffff">
+                                    <input value="ON" name="resize" type="checkbox">调大小
+			                      </td>
+                                  <td bgcolor="#ffffff">
+                                    <input value="ON" name="scroll" type="checkbox">滚动条
+				                 </td>
+                                </tr>
+                                <tr bgcolor="#f0f0f0"> 
+                                  <td bgcolor="#ffffff">
+                                    <input value="ON" name="menu" type="checkbox">菜 单 
+				                  </td>
+                                  <td bgcolor="#ffffff">
+                                    <input value="ON" name="selfopen" type="checkbox">在本窗口打开</td>
+                                  <td colspan="2" bgcolor="#ffffff">
+				  	                &nbsp;左边距: <input size="10" name="L">
+					                &nbsp;顶部距离:<input size="10" name="T">
+                                  </td>
+                                  <td colspan="2" bgcolor="#ffffff">
+				 	                 &nbsp;宽:<input size="10" name="width">
+                   	                 &nbsp;高:<input size="10" name="heigh">
+                                  </td>
+                                </tr>
+                                <tr bgcolor="#f0f0f0"> 
+                                  <td colspan="6" align="center" bgcolor="#ffffff" valign="middle">
+                                   <div style="margin-top: 5px;"><input class="but" value="测 试" name="button" onclick="S_Code();eval(temp)" ;="" type="button">
+                                    <input class="but" value="生成代码" name="Button" onclick="S_Code();document.form1.showcode.value=temp;" type="button"></div> 
+                                  </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                              <textarea id="showcode" name="textarea" rows="14" cols="145"></textarea>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </form>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+       </div>
+    </div>
+   </div>
+ </div>
+  <div class="box">
+                <h1>工具简介</h1>
+                <div class="box1">
+                  <span class="info2">        通过本工具可以设置弹窗的参数和方式。包括弹窗的大小、链接、地址栏、滚动条、状态栏等等。
+                  </span>
+                </div>
+   </div>
+</div>
+<!--foot-->
+
+
+
+
+
+</body></html>

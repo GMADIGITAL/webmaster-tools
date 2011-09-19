@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>UTF-8编码转换工具</title>
+
+
+<meta content="帮助您在线将编码转换成UTF-8编码，无需安装任何转换工具。主要用于网站文件编码方式的整体转换上。" name="description">
+<meta content="UTF-8, UTF-8编码转换工具" name="keywords">
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<link rel="shortcut icon" href="#.ico" type="image/x-icon">
+<link href="../css/toolsite.css" rel="stylesheet" type="text/css">
+
+
+
+			
+</head>
+<body>
+<!--head-->
+<script type="text/javascript">
+function ConvUtf(obj,btn){
+   document.getElementById("result").value=obj.value.replace(/[^\u0000-\u00FF]/g,function($0){return escape($0).replace(/(%u)(\w{4})/gi,"&#x$2;")});
+}
+function ResChinese(obj,btn)
+{
+   document.getElementById("content").value=unescape(obj.value.replace(/&#x/g,'%u').replace(/;/g,''));
+}
+function preview() {
+	var win = window.open();
+	win.document.open('text/html', 'replace');
+	win.document.writeln(content.value);
+	win.document.close();
+}
+</script>
+<!--middle-->
+<!--main-->
+<div class="main">
+ <div class="box">
+   <div id="b_1">
+       <h1>UTF-8编码转换工具</h1>
+       <div class="box1">
+             <div class="info1">
+               <div style="color: rgb(0, 106, 173); font-size: 16px; font-weight: bold;" align="center">UTF-8编码在线转换器</div>
+               <div style="padding-top: 10px;" align="center">
+                <textarea id="content" name="content" style="border: 1px solid rgb(197, 226, 242); overflow: visible; width: 850px;" rows="15">请将您要转换的汉文内容粘贴在这里。[由于兼容性问题，此转换功能只能在IE中使用，FIREFOX无效]</textarea>
+                </div>
+                <div style="padding: 2px 0px 0px; margin-left: 37px;">
+                <input class="but" id="conv" value="中文 转换 UTF-8 ↓" onclick="ConvUtf(content,this);" type="button">
+                <input class="but" id="res" value="UTF-8 还原 中文 ↑" onclick="ResChinese(result,this);" type="button">
+               </div>
+               <div align="center">
+                <textarea id="result" name="result" style="border: 1px solid rgb(197, 226, 242); overflow: visible; width: 850px;" rows="15"></textarea>
+              </div>
+               <div style="padding: 2px 0px 0px; margin-left: 37px;">
+               <input class="but" id="pre" value="预览转换代码" onclick="preview();" type="button">
+               </div>      
+        </div>
+      </div>
+   </div>
+ </div>
+  <div class="box">
+                <h1>工具简介</h1>
+                <div class="box1">
+                  <span class="info2">    通过本工具可以在线将编码转换成UTF-8编码，无需安装任何转换工具。主要用于网站文件编码方式的整体转换上。
+                  </span>
+                </div>
+   </div>
+</div><!--foot-->
+
+
+
+
+
+</body></html>

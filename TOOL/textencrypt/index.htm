@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>文字在线加密解密</title>
+
+
+<meta content="帮助您给文本或汉字加密。" name="description">
+<meta content="文字加密,文字解密" name="keywords">
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<link rel="shortcut icon" href="#.ico" type="image/x-icon">
+<link href="../css/toolsite.css" rel="stylesheet" type="text/css">
+
+
+
+			
+</head>
+<body>
+<!--head-->
+<script language="javascript" type="text/javascript">
+var sdf3="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcde";
+function textEncrypt(str)
+{;var t="";var a,a1,a2,a3;var b=sdf3.split("");
+ for(var x=0;x<str.length;x++){a=str.charCodeAt(x)
+a1=a%41;a=(a-a1)/41;a2=a%41;a=(a-a2)/41;a3=a%41;t+=b[a3]+b[a2]+b[a1]}a="z";
+for(var x=0;x<t.length;x+=3){if(t.charAt(x)!="A")
+{return t}a+=t.substr(x+1,2)}return a}
+
+function textDecryption(str)
+{;var a1,a2,a3,b=sdf3,d=0,t,a;
+if(str.charAt(0)=="z"){t=new Array(Math.floor((str.length-1)/2))
+a=t.length;for(var x=0;x<a;x++){d++;a2=b.indexOf(str.charAt(d))
+d++;a3=b.indexOf(str.charAt(d))
+t[x]=a2*41+a3}};
+else{t=new Array(Math.floor(str.length/3))
+a=t.length;for(var x=0;x<a;x++){a1=b.indexOf(str.charAt(d))
+d++;a2=b.indexOf(str.charAt(d))
+d++;a3=b.indexOf(str.charAt(d))
+d++;t[x]=a1*1681+a2*41+a3}}
+a=eval("String.fromCharCode("+t.join(',')+")");return a}
+function copy(obj)
+{
+  var Result=document.getElementById(obj).value;
+  if(Result=="")
+  {
+    return ;
+  }
+  else 
+  {
+  window.clipboardData.setData("Text",Result); 
+  document.getElementById(obj).select(); 
+  window.alert('已复制成功。');
+  }
+}
+</script>
+<!--middle-->
+<!--main-->
+<div class="main">
+ <div class="box">
+   <div id="b_1">
+       <h1>文字在线加密解密</h1>
+       <div class="box1">
+            <div class="info1">
+              <div style="color: rgb(0, 106, 173); font-size: 16px; font-weight: bold;" align="center">文字在线加密解密</div>
+               <div style="margin-left: 40px; color: rgb(51, 102, 153);">请把要加密的文字粘贴到下面表单：</div>
+              <div align="center">
+                <textarea id="content" name="content" style="border: 1px solid rgb(197, 226, 242); overflow: visible; width: 850px;" rows="15">[由于兼容性问题，此加/解密功能只能在IE中使用，FIREFOX无效]</textarea>
+              </div>
+              <div style="padding: 2px 0px 0px; margin-left: 36px;">
+                <input class="but" id="conv" value="加密 ↓" onclick="result.value=textEncrypt(content.value);" type="button">
+                <input class="but" id="res" value="解密 ↑" onclick="content.value=textDecryption(result.value)" type="button">
+                <input class="but" id="Button1" value="复制" onclick="copy('content')" type="button">
+                <input class="but" id="Button3" value="清空" onclick="content.value=''" type="button">
+              </div>
+              <div style="margin-left: 41px; color: rgb(51, 102, 153);">加密结果如下：</div>
+              <div align="center">
+                <textarea id="result" name="result" style="border: 1px solid rgb(197, 226, 242); overflow: visible; width: 850px;" rows="15"></textarea>
+              </div> 
+              <div style="padding: 2px 0px 0px; margin-left: 36px;">
+                <input class="but" id="Button4" value="复制" onclick="copy('result')" type="button">
+                <input class="but" id="Button2" value="清空" onclick="result.value=''" type="button">
+              </div>  
+        </div>
+      </div>
+   </div>
+ </div>
+  <div class="box">
+                <h1>工具简介</h1>
+                <div class="box1">
+                  <span class="info2">
+                   通过本工具可以给文本或汉字加密（例如：给自已的日记加密）
+有时候查看某些网页的“源码”是一串串加密的“乱码”，如何把加密的“乱码”还原成能看懂的“代码”？就要使用下面的方法！<br>
+
+使用方法：<br>
+    1、解密方法：将加密的“乱码”粘贴在下面的上窗口里，按“解密”按钮，在“下窗口”里出现：还原后的代码或汉字。<br>
+    2、加密方法：将正常的汉字或网页代码粘贴在“上窗口”里，按“加密”按钮，在“下窗口”里出现：加密的乱码。<br>
+ 3、网页代码有时候直接复制粘贴在代码编辑器里，会出现另一种“乱码”，例如：在“下窗口”里复制出来以后，不要直接粘贴到网页。<br>
+代码编辑器里，要在“记事本”里粘贴后，复制出来出来,再粘贴到代码编辑器中！<br>
+
+                  </span>
+                </div>
+   </div>
+</div><!--foot-->
+
+
+
+
+
+</body></html>
